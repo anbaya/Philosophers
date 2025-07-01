@@ -14,8 +14,8 @@
 
 int	still_alive(t_philosopher *philo, size_t time_to_die)
 {
-	int	dead;
 	size_t	last_meal_time;
+	int		dead;
 
 	pthread_mutex_lock(philo->eat_lock);
 	last_meal_time = philo->end;

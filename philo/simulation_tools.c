@@ -28,7 +28,7 @@ void	fork_taking(t_philosopher *philos)
 		if (simulation_stopped(philos))
 		{
 			pthread_mutex_unlock(philos->left_fork);
-			return;
+			return ;
 		}
 		pthread_mutex_lock(philos->right_fork);
 		printer(philos, "has taken a fork");
@@ -40,7 +40,7 @@ void	fork_taking(t_philosopher *philos)
 		if (simulation_stopped(philos))
 		{
 			pthread_mutex_unlock(philos->right_fork);
-			return;
+			return ;
 		}
 		pthread_mutex_lock(philos->left_fork);
 		printer(philos, "has taken a fork");
