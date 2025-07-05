@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbaya <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: anbaya <anbaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 16:42:12 by anbaya            #+#    #+#             */
-/*   Updated: 2025/06/18 16:42:15 by anbaya           ###   ########.fr       */
+/*   Updated: 2025/07/05 13:43:30 by anbaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,13 @@ int					simulation(t_simulation *sim, pthread_mutex_t *forks);
 void				*philosopher_routine(void *pointer);
 size_t				timer(void);
 int					still_alive(t_philosopher *philo, size_t time_to_die);
-void				cleaner(char *str, t_simulation *sim,
+int				cleaner(char *str, t_simulation *sim,
 						pthread_mutex_t *forks, int exit_code);
 int					splited_usleep(size_t milliseconds, t_philosopher *philo);
 void				printer(t_philosopher *philo, char *str);
 void				eating(t_philosopher *philos);
 void				sleeping(t_philosopher *philos);
+void				thinking(t_philosopher *philo);
 int					starving(t_philosopher *philos);
 int					full(t_philosopher *philos);
 

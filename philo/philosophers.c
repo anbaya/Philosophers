@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbaya <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: anbaya <anbaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 16:41:54 by anbaya            #+#    #+#             */
-/*   Updated: 2025/06/18 16:41:57 by anbaya           ###   ########.fr       */
+/*   Updated: 2025/07/05 13:45:42 by anbaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 int	still_alive(t_philosopher *philo, size_t time_to_die)
 {
 	size_t	last_meal_time;
-	int		dead;
+	int		life;
 
 	pthread_mutex_lock(philo->eat_lock);
 	last_meal_time = philo->end;
 	if (philo->meals == 0)
 		last_meal_time = philo->start;
 	if (timer() - last_meal_time > time_to_die && philo->eating == 0)
-		dead = 0;
+		life = 0;
 	else
-		dead = 1;
+		life = 1;
 	pthread_mutex_unlock(philo->eat_lock);
-	return (dead);
+	return (life);
 }
 
 int	ft_atoi(char *str)
@@ -76,9 +76,9 @@ int	ft_checks(char **argv)
 	int	i;
 
 	i = 1;
-	if (ft_atoi(argv[1]) > 700)
+	if (ft_atoi(argv[1]) > 200)
 	{
-		printf("\033[33mError: Too many philosophers\n");
+		printf("Error: Too many philosophers\n");
 		return (1);
 	}
 	while (argv[i])
@@ -86,9 +86,9 @@ int	ft_checks(char **argv)
 		if ((ft_atoi(argv[i]) <= 0) || (ft_isdigit(argv[i])) == 0)
 		{
 			if (ft_atoi(argv[i]) == -1)
-				printf("\033[33mError: Integer overflow\n");
+				printf("Error: Integer overflow\n");
 			else
-				printf("\033[33mError: Invalid arguments\n");
+				printf("Error: Invalid arguments\n");
 			return (1);
 		}
 		i++;
@@ -104,7 +104,7 @@ int	main(int ac, char **av)
 
 	if (ac != 5 && ac != 6)
 	{
-		printf("\033[36mUsage: num_philosophers time_to_die time_to_eat "
+		printf("Usage: num_philosophers time_to_die time_to_eat "
 			"time_to_sleep [num_meals](optional)\n");
 		return (1);
 	}
@@ -117,6 +117,5 @@ int	main(int ac, char **av)
 	forks_init(forks, ft_atoi(av[1]));
 	init_philosophers(philos, sim, forks, av);
 	simulation(sim, forks);
-	cleaner(NULL, sim, forks, 0);
-	return (0);
+	return (cleaner(NULL, sim, forks, 0));
 }

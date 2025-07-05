@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anbaya <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: anbaya <anbaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 16:42:44 by anbaya            #+#    #+#             */
-/*   Updated: 2025/06/18 16:42:46 by anbaya           ###   ########.fr       */
+/*   Updated: 2025/07/05 13:44:05 by anbaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	splited_usleep(size_t milliseconds, t_philosopher *philo)
 
 	start = timer();
 	while ((timer() - start) < milliseconds && !simulation_stopped(philo))
-		usleep(60);
+		usleep(10);
 	return (0);
 }
 
@@ -48,7 +48,7 @@ void	printer(t_philosopher *philo, char *str)
 	pthread_mutex_unlock(philo->print_lock);
 }
 
-void	cleaner(char *str, t_simulation *sim, pthread_mutex_t *forks,
+int	cleaner(char *str, t_simulation *sim, pthread_mutex_t *forks,
 		int exit_code)
 {
 	int	i;
@@ -70,5 +70,5 @@ void	cleaner(char *str, t_simulation *sim, pthread_mutex_t *forks,
 		free(sim->philos);
 	if (sim)
 		free(sim);
-	exit(exit_code);
+	return (exit_code);
 }
